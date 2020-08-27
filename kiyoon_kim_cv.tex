@@ -31,6 +31,8 @@
 \usepackage{numprint}
 
 %%
+\def \includeMinor {}
+
 % Blank term definition
 %\def \disallowBlankTerm {}
 
@@ -38,33 +40,43 @@
 % comment below definition in order to use dollar currency
 %\def \currencyEuro {}
 %\def \currencyPound {}
-\def \currencyCanadaDollar{}
+%\def \currencyCanadaDollar{}
+%\def \currencySwissFranc{}
 
 % thousand separator
 \ifx \currencyEuro \undefined
   \ifx \currencyPound \undefined
     \ifx \currencyCanadaDollar \undefined
-      % currencyDollar
-      \npthousandsep{,}\npthousandthpartsep{}\npdecimalsign{.}
-      \def \symbolcurrency {\textdollar}
-      \def \textcurrency {USD}
-      \def \rateWonCurrency {1127.00}
-      \def \dateCurrency {(Oct 17, 2018)}
+      \ifx \currencySwissFranc \undefined
+          % currencyDollar
+          \npthousandsep{,}\npthousandthpartsep{}\npdecimalsign{.}
+          \def \symbolcurrency {\textdollar}
+          \def \textcurrency {USD}
+          \def \rateWonCurrency {1122.90}
+          \def \dateCurrency {(Feb 23, 2019)}
+      \else
+        % currencySwissFranc
+          \npthousandsep{'}\npthousandthpartsep{}\npdecimalsign{.}
+          \def \symbolcurrency {CHF\ }
+          \def \textcurrency {CHF}
+          \def \rateWonCurrency {1121.61}
+          \def \dateCurrency {(30 Jan, 2019)}
+      \fi
     \else
-      % currencyCanadaDollar
-      \npthousandsep{,}\npthousandthpartsep{}\npdecimalsign{.}
-      \def \symbolcurrency {\textdollar}
-      \def \textcurrency {CAD}
-      \def \rateWonCurrency {845.18}
-      \def \dateCurrency {(Dec 7, 2018)}
+          % currencyCanadaDollar
+          \npthousandsep{,}\npthousandthpartsep{}\npdecimalsign{.}
+          \def \symbolcurrency {\textdollar}
+          \def \textcurrency {CAD}
+          \def \rateWonCurrency {845.18}
+          \def \dateCurrency {(Dec 7, 2018)}
     \fi
   \else
     % currencyPound
     \npthousandsep{,}\npthousandthpartsep{}\npdecimalsign{.}
     \def \symbolcurrency {\textsterling}
     \def \textcurrency {GBP}
-    \def \rateWonCurrency {1477.38}
-    \def \dateCurrency {(17 Oct, 2018)}
+    \def \rateWonCurrency {1450.36}
+    \def \dateCurrency {(19 Jan, 2019)}
   \fi
 \else
   % currencyEuro
@@ -142,17 +154,19 @@
 \begin{document}
 
 \begin{minipage}[l]{0.33\textwidth}
- \includegraphics{Kiyoon.jpg}
+ \includegraphics[scale=0.3]{Kiyoon.jpg}
+  \vspace{2mm}
 \end{minipage}
-\begin{minipage}[r]{0.50\textwidth}
- Hello, I'm a computer scientist with machine learning and signal processing background.
- 
+\begin{minipage}[r]{0.55\textwidth}
+ Hello, I'm a computer scientist with computer vision, machine learning and signal processing background.
+
 \end{minipage}
+
 %----------HEADING-----------------
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-  \textbf{\href{http://kiyoon.kim/}{\Large Kiyoon Kim}} & Email : \ \ \ \ \ \ \href{mailto:im@kiyoon.kim}{im@kiyoon.kim}\\
-  \href{http://kiyoon.kim/}{http://kiyoon.kim/} & \href{mailto:k.kim-20@sms.ed.ac.uk}{k.kim-20@sms.ed.ac.uk}\\
-  & Mobile : \ \ \ +44-7494-630465 \\
+  \textbf{\href{https://kiyoon.kim/}{\Large Kiyoon Kim}} & Email : \  \href{mailto:kiyoon.kim@ed.ac.uk}{kiyoon.kim@ed.ac.uk}\\
+  \href{https://kiyoon.kim/}{https://kiyoon.kim/} & Mobile : \ \ \ \ \ \  +44-7494-630465 \\
+  
 \end{tabular*}
 
 %-----------EDUCATION-----------------
@@ -160,18 +174,17 @@
   \resumeSubHeadingListStart
     \resumeSubheading
       {The University of Edinburgh}{Edinburgh, United Kingdom}
-      {MSc in Artificial Intelligence}{Sep 2018 -- Sep 2019 (Estimated)}
+      {PhD in Informatics: Robotics, Computer Vision, Computer Graphics and Animation}{Sep 2019 -- Aug 2023 (Estimated)}
+    \resumeSubheading
+      {The University of Edinburgh}{Edinburgh, United Kingdom}
+      {MSc in Artificial Intelligence}{Sep 2018 -- Aug 2019}
     \resumeSubheading
       {Ulsan National Institute of Science and Technology (UNIST)}{Ulsan, South Korea}
       {Bachelor in Electrical Engineering, Computer Science and Engineering: \textbf{magna cum laude}}{Mar 2014 -- Feb 2018}
       \resumeItemListStart
         \resumeItem{Contribution Award\footnotemark}
           {Chairman's Award}
-        \resumeItem{GPA of Computer Science and Engineering}
-          {\numprint{4.15}/\numprint{4.3} (\numprint{97.5}/100)}
-        \resumeItem{GPA of Electrical Engineering}
-          {\numprint{3.94}/\numprint{4.3} (\numprint{95.4}/100)}
-        \resumeItem{GPA of both majors}
+        \resumeItem{GPA of major subjects}
           {\numprint{4.00}/\numprint{4.3} (\numprint{96.0}/100)}
         \resumeItem{Total Grade Point Average}
           {\numprint{3.79}/\numprint{4.3} (\numprint{93.9}/100)}
@@ -181,41 +194,41 @@
   \footnotetext{Students who have shown especially good behaviour or enhanced the university's honour can be given a contribution award. The contribution award winner shall be selected by deliberation of the Committee based on recommendations from the head of the school (department) in each school (department). In 2018, among 704 undergraduates from various departments, 6 people have been awarded.}
 
 %-----------SCHOLARSHIPS-----------------
-\newcommand{\calcCurrencyPrice}[2]{\FPeval{#2}{round(#1 / \rateWonCurrency,0)}} % #1 = input, #2 = output
-\newcommand{\setWonPrice}[1]{\def\wonprice{#1}\calcCurrencyPrice{\wonprice}{\currencyprice}}   % Define won price and calculate currency price from the won price
-\def \currencyWonPrint{\textwon\numprint{\wonprice} (\symbolcurrency\numprint{\currencyprice})}
+% \newcommand{\calcCurrencyPrice}[2]{\FPeval{#2}{round(#1 / \rateWonCurrency,0)}} % #1 = input, #2 = output
+% \newcommand{\setWonPrice}[1]{\def\wonprice{#1}\calcCurrencyPrice{\wonprice}{\currencyprice}}   % Define won price and calculate currency price from the won price
+% \def \currencyWonPrint{\textwon\numprint{\wonprice} (\symbolcurrency\numprint{\currencyprice})}
 
-\section{Scholarships}
-Currency measure: 1 \textcurrency{} = \numprint{\rateWonCurrency} KRW \dateCurrency{}
-  \resumeSubHeadingListStart
-    \resumeSubheading
-      {NAVER UNIST Undergraduate Poster Award (NAVER UUPA)}{NAVER Corp., UNIST}
-      {\setWonPrice{2500000}\currencyWonPrint}{Dec 2017}
-    \resumeSubheading
-      {UC Berkeley Entrepreneurship Programme}{UNIST}
-      {\setWonPrice{9975200}\currencyWonPrint}{Jan 2017 -- Mar 2017}
-    \resumeSubheading
-      {Living Scholarship}{UNIST}
-      {\setWonPrice{2140000}\currencyWonPrint}{Mar 2016 -- Dec 2017}
-    \resumeSubheading
-      {Allowance}{UNIST}
-      {\setWonPrice{2517600}\currencyWonPrint}{Mar 2016 -- Dec 2017}
-    \resumeSubheading
-      {National Science \& Engineering Scholarship}{Korea Student Aid Foundation}
-      {\setWonPrice{12588000}\currencyWonPrint}{Mar 2016 -- Dec 2017}
-    \resumeSubheading
-      {Korea Supercomputing Challenge (KSC 2015)}{KISTI Supercomputing Education Center}
-      {\setWonPrice{500000}\currencyWonPrint{} (shared by 2 members)}{Oct 2015}
-    \resumeSubheading
-      {HeXATHON}{UNIST, NAVER Corp.}
-      {\setWonPrice{1500000}\currencyWonPrint{} (shared by 4 members)}{May 2015}
-    \resumeSubheading
-      {Tutor for Engineering Programming I (3 semesters)}{UNIST}
-      {\setWonPrice{1200000}\currencyWonPrint}{Sep 2014 -- Dec 2015}
-    \resumeSubheading
-      {Academic Performance Scholarship}{UNIST}
-      {\setWonPrice{12660000}\currencyWonPrint}{Mar 2014 -- Dec 2015}
-  \resumeSubHeadingListEnd
+% \section{Scholarships}
+% Currency measure: 1 \textcurrency{} = \numprint{\rateWonCurrency} KRW \dateCurrency{}
+%   \resumeSubHeadingListStart
+%     \resumeSubheading
+%       {NAVER UNIST Undergraduate Poster Award (NAVER UUPA)}{NAVER Corp., UNIST}
+%       {\setWonPrice{2500000}\currencyWonPrint}{Dec 2017}
+%     \resumeSubheading
+%       {UC Berkeley Entrepreneurship Programme}{UNIST}
+%       {\setWonPrice{9975200}\currencyWonPrint}{Jan 2017 -- Mar 2017}
+%     \resumeSubheading
+%       {Living Scholarship}{UNIST}
+%       {\setWonPrice{2140000}\currencyWonPrint}{Mar 2016 -- Dec 2017}
+%     \resumeSubheading
+%       {Allowance}{UNIST}
+%       {\setWonPrice{2517600}\currencyWonPrint}{Mar 2016 -- Dec 2017}
+%     \resumeSubheading
+%       {National Science \& Engineering Scholarship}{Korea Student Aid Foundation}
+%       {\setWonPrice{12588000}\currencyWonPrint}{Mar 2016 -- Dec 2017}
+%     \resumeSubheading
+%       {Korea Supercomputing Challenge (KSC 2015)}{KISTI Supercomputing Education Center}
+%       {\setWonPrice{500000}\currencyWonPrint{} (shared by 2 members)}{Oct 2015}
+%     \resumeSubheading
+%       {HeXATHON}{UNIST, NAVER Corp.}
+%       {\setWonPrice{1500000}\currencyWonPrint{} (shared by 4 members)}{May 2015}
+%     \resumeSubheading
+%       {Tutoring for Engineering Programming I (3 semesters)}{UNIST}
+%       {\setWonPrice{1200000}\currencyWonPrint}{Sep 2014 -- Dec 2015}
+%     \resumeSubheading
+%       {Academic Performance Scholarship}{UNIST}
+%       {\setWonPrice{12660000}\currencyWonPrint}{Mar 2014 -- Dec 2015}
+%   \resumeSubHeadingListEnd
 
 %-----------PUBLICATION----------------
 \section{Publications}
@@ -231,14 +244,32 @@ Currency measure: 1 \textcurrency{} = \numprint{\rateWonCurrency} KRW \dateCurre
 \section{Experience}
   \resumeSubHeadingListStart
     \resumeSubheading
-      {Tutor of Imperative Programming}{University of Edinburgh}
-      {Tutored Java programming with Greenfoot IDE.}{Nov 2018}
+      {Demonstration for Machine Learning Practical}{The University of Edinburgh}
+      {Ran lab sessions for the Machine Learning Practical (MSc module).}{Sep 2019 --}
+      
     \resumeSubheading
-      {Private Teaching}{Personal}
-      {Taught TOEIC (English) to a job seeker.}{Jul 2018 -- Aug 2018}
+      {Tutoring for Object-Oriented Programming}{The University of Edinburgh}
+      {Ran 2 tutorial sessions of OOP Java programming tutorials with Eclipse IDE.}{Jan 2019 -- Apr 2019}
+      \resumeItemListStart
+        \resumeSimpleItem{Nominated for the \textbf{Best Student Who Tutors Award}}
+      \resumeItemListEnd
+      
     \resumeSubheading
-      {Private Teaching}{Personal}
-      {Taught R Language to a master student.}{Apr 2018}
+      {Tutoring for Imperative Programming}{The University of Edinburgh}
+      {Ran tutorial sessions of Java programming with Greenfoot IDE.}{Nov 2018}
+      
+    \ifdefined \includeMinor
+    \resumeSubheading
+      {Private Tutoring}{Personal}
+      {Tutored TOEIC (English) to a job seeker.}{Jul 2018 -- Aug 2018}
+    \fi
+      
+    \ifdefined \includeMinor
+    \resumeSubheading
+      {Private Tutoring}{Personal}
+      {Tutored R Language to a master student.}{Apr 2018}
+    \fi
+    
     \resumeSubheading
       {NAVER UNIST Undergraduate Poster Award (NAVER UUPA)}{NAVER Corp., UNIST}
       {Poster presentation of Extreme Low Resolution Activity Recognition: won \textbf{1st place}}{Dec 2017}
@@ -246,8 +277,10 @@ Currency measure: 1 \textcurrency{} = \numprint{\rateWonCurrency} KRW \dateCurre
       {EgoVid Inc. (\href{http://egovid.com}{http://egovid.com})}{Ulsan, South Korea}
       {Machine Learning Researcher \& Developer}{May 2016 -- Dec 2017}
       \resumeItemListStart
+        \ifdefined \includeMinor
         \resumeItem{Drone Project Manager}
           {Autonomous drone project using ROS on NVIDIA Jetson TX2 embedded board.}
+        \fi
         \resumeItem{Realtime Demonstration Running on Embedded Device at CVPR 2017}
           {Demonstrated my work running on NVIDIA Jetson TX2 and helped my colleague for implementing different demonstration about Video Anonymisation Algorithm at CVPR (Computer Vision Pattern Recognition) 2017 conference.\\
           \href{https://youtu.be/7jkSum_pj9o?t=25s}{\underline{https://youtu.be/7jkSum\_pj9o?t=25s}}}
@@ -258,39 +291,54 @@ Currency measure: 1 \textcurrency{} = \numprint{\rateWonCurrency} KRW \dateCurre
           {AAAI Conference on Artificial Intelligence 2017, San Francisco, California, USA\\
           Asilomar 2016, Pacific Grove, California, USA\\
           Ubicomp 2016, Heidelberg, Germany}
+          
+        \ifdefined \includeMinor
         \resumeItem{Linux GPU Computing Server Setup for Machine Learning}
           {Installed Ubuntu Server and programs needed for machine learning and sharing devices with multiple users. VNC remote desktop, Docker and Virtualenv.}
+        \fi
+          
+        \ifdefined \includeMinor
         \resumeItem{Study: Machine Learning and Computer Vision}
           {Studied machine learning and computer vision with Coursera, Udacity courses.}
         \resumeItem{Study: OFDM Radar Signal Processing}
           {Studied OFDM radar signal processing for possible future work in radar classification machine learning problem.}
+        \fi
       \resumeItemListEnd
     
+    \ifdefined \includeMinor
     \resumeSubheading
-      {Private Teaching}{Personal}
-      {Taught Computer Science and Engineering subjects to two university students.}{Mar 2016 -- Dec 2016}
+      {Private Tutoring}{Personal}
+      {Tutored Computer Science and Engineering subjects to two university students.}{Mar 2016 -- Dec 2016}
       \resumeItemListStart
         \resumeSimpleItem{Object Oriented Programming (C++)}
         \resumeSimpleItem{Data Structure (C++)}
         \resumeSimpleItem{Principles of Programming Languages (SML, Racket, Python)}
       \resumeItemListEnd
+    \fi
       
+    \ifdefined \includeMinor
     \resumeSubheading
-      {Private Teaching}{Personal}
-      {Taught C Language to a pre-high school student.}{Jan 2016 -- Feb 2016}
+      {Private Tutoring}{Personal}
+      {Tutored C Language to a pre-high school student.}{Jan 2016 -- Feb 2016}
+    \fi
       
+    \ifdefined \includeMinor
     \resumeSubheading
       {USPTO Patent Information Crawler}{UNIST}
       {Developed in Python for building custom database.}{Dec 2015 -- Apr 2016}
+    \fi
       
     \resumeSubheading
       {Korea Supercomputing Challenge (KSC 2015)}{KISTI Supercomputing Education Center}
       {MPI parallel computing competition: won \textbf{5th place}}{Oct 2015}
       
+    \ifdefined \includeMinor
     \resumeSubheading
       {Intel Xeon Phi optimisation, parallelisation education}{Intel Corp.}
       {Completed the education with practices about OpenMP, Vectorisation, and Intel compiler.}{Aug 2015}
+    \fi
       
+    \ifdefined \includeMinor
     \resumeSubheading
       {Personal Linux Server Buildup}{Personal}
       {Fedora server buildup for personal use}{Aug 2015}
@@ -299,37 +347,51 @@ Currency measure: 1 \textcurrency{} = \numprint{\rateWonCurrency} KRW \dateCurre
         \resumeSimpleItem{Multimedia streaming server}
         \resumeSimpleItem{Web \& DB server (Gitlab, URL Shortener, Spam filtering)}
       \resumeItemListEnd
+    \fi
+      
+    \ifdefined \includeMinor
     \resumeSubheading
       {WISET Startup Springboard}{UNIST}
       {Completed the entrepreneurship programme.}{Aug 2015}
+    \fi
     
+    \ifdefined \includeMinor
     \resumeSubheading
-      {Private Teaching}{Personal}
-      {Taught mathematics to a high school student.}{July 2015 -- Aug 2015}
+      {Private Tutoring}{Personal}
+      {Tutored mathematics to a high school student.}{July 2015 -- Aug 2015}
+    \fi
       
     \resumeSubheading
       {HeXATHON}{UNIST, NAVER Corp.}
       {QR code waiting system implemented with Raspberry Pi: won \textbf{1st place}}{May 2015}
       
+    \ifdefined \includeMinor
     \resumeSubheading
       {UNIST Startup Clinic}{UNIST, NAVER Corp.}
       {Smart home app controlling electric output}{Mar 2015}
+    \fi
     
+    \ifdefined \includeMinor
     \resumeSubheading
-      {Private Teaching}{Personal}
-      {Taught physics to a pre-high school student.}{Jan 2015 -- Feb 2015}
+      {Private Tutoring}{Personal}
+      {Tutored physics to a pre-high school student.}{Jan 2015 -- Feb 2015}
+    \fi
       
     \resumeSubheading
-      {Tutor of Engineering Programming I}{UNIST}
-      {Taught the subject for 3 semesters, to 3 university students per semester.}{Sep 2014 -- Dec 2015}
+      {Tutoring for Engineering Programming I}{UNIST}
+      {Ran tutorial sessions for 3 terms.}{Sep 2014 -- Dec 2015}
       
+    \ifdefined \includeMinor
     \resumeSubheading
-      {Private Teaching}{Personal}
-      {Taught mathematics to a high school student.}{Jul 2014 -- Aug 2014}
+      {Private Tutoring}{Personal}
+      {Tutored mathematics to a high school student.}{Jul 2014 -- Aug 2014}
+    \fi
       
+    \ifdefined \includeMinor
     \resumeSubheading
-      {Math Teacher at Private School}{Morning of Math}
-      {Problem-solving assistant for high school students.}{Jul 2014 -- Aug 2014}
+      {Math Tutor at Private School}{Morning of Math}
+      {Problem-solving assistant for high school students}{Jul 2014 -- Aug 2014}
+    \fi
       
     \ifx \disallowBlankTerm{} \undefined
     \resumeSubheading
@@ -360,6 +422,8 @@ Currency measure: 1 \textcurrency{} = \numprint{\rateWonCurrency} KRW \dateCurre
         \resumeItem{Flash programs}
           {Simple Flash programs.}
           \resumeItemListEnd
+          
+    \ifdefined \includeMinor
     \resumeSubheading
       {Flash programming}{Personal}
       {Studied and implemented simple Flash programs.}{Nov 2004 -- Apr 2010}
@@ -367,6 +431,7 @@ Currency measure: 1 \textcurrency{} = \numprint{\rateWonCurrency} KRW \dateCurre
         \resumeSimpleItem{Elementary, middle school teachers used my programs.}
         \resumeSimpleItem{Managed a blog to release some programs.}
       \resumeItemListEnd
+    \fi
 
 
   \resumeSubHeadingListEnd
