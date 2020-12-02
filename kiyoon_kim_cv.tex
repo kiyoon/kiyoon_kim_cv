@@ -30,8 +30,26 @@
 
 \usepackage{numprint}
 
+
+\usepackage{fontawesome}
+\usepackage{xcolor}
+\definecolor{LinkedinBlue}{HTML}{0072B1}
+
+\usepackage[utf8]{inputenc}
+% use KoTeX package for Korean 
+\usepackage{kotex}
+
+%\def \useKorean {}  % Render Korean CV, if not defined use English
+
+\ifx \useKorean \undefined
+    \newcommand{\engkor}[2]{#1}
+\else
+    \newcommand{\engkor}[2]{#2}
+\fi
+
+
 %%
-\def \includeMinor {}
+%\def \includeMinor {}
 
 % Blank term definition
 %\def \disallowBlankTerm {}
@@ -150,34 +168,35 @@
 %-------------------------------------------
 %%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \begin{document}
 
-\begin{minipage}[l]{0.33\textwidth}
- \includegraphics[scale=0.3]{Kiyoon.jpg}
-  \vspace{2mm}
-\end{minipage}
-\begin{minipage}[r]{0.55\textwidth}
- Hello, I'm a computer scientist with computer vision, machine learning and signal processing background.
+% \begin{minipage}[l]{0.33\textwidth}
+%  \includegraphics[scale=0.3]{Kiyoon.jpg}
+%   \vspace{2mm}
+% \end{minipage}
+% \begin{minipage}[r]{0.55\textwidth}
+%  Hello, I'm a computer scientist with computer vision, machine learning and signal processing background.
 
-\end{minipage}
+% \end{minipage}
 
 %----------HEADING-----------------
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-  \textbf{\href{https://kiyoon.kim/}{\Large Kiyoon Kim}} & Email : \  \href{mailto:kiyoon.kim@ed.ac.uk}{kiyoon.kim@ed.ac.uk}\\
-  \href{https://kiyoon.kim/}{https://kiyoon.kim/} & Mobile : \ \ \ \ \ \  +44-7494-630465 \\
+  \textbf{\href{https://kiyoon.kim/}{\Large \engkor{Kiyoon Kim}{김기윤}}} & Email : \  \href{mailto:kiyoon.kim@ed.ac.uk}{kiyoon.kim@ed.ac.uk}\\
+  \href{https://kiyoon.kim/}{https://kiyoon.kim/} & Mobile : \ \ \ \ \ \  +82-10-6469-3070 \\
+  & \href{https://www.linkedin.com/in/kiyoon-kim-222933116}{\textbf{\textsf{Linked}} \textcolor{LinkedinBlue}{\faicon{linkedin-square}}}
   
 \end{tabular*}
 
 %-----------EDUCATION-----------------
-\section{Education}
+
+\engkor{\section{Education}
   \resumeSubHeadingListStart
     \resumeSubheading
-      {The University of Edinburgh}{Edinburgh, United Kingdom}
+      {The University of Edinburgh} {Edinburgh, United Kingdom}
       {PhD in Informatics: Robotics, Computer Vision, Computer Graphics and Animation}{Sep 2019 -- Aug 2023 (Estimated)}
     \resumeSubheading
       {The University of Edinburgh}{Edinburgh, United Kingdom}
-      {MSc in Artificial Intelligence}{Sep 2018 -- Aug 2019}
+      {MSc in Artificial Intelligence (With Merit, 70\%)}{Sep 2018 -- Aug 2019}
     \resumeSubheading
       {Ulsan National Institute of Science and Technology (UNIST)}{Ulsan, South Korea}
       {Bachelor in Electrical Engineering, Computer Science and Engineering: \textbf{magna cum laude}}{Mar 2014 -- Feb 2018}
@@ -192,6 +211,32 @@
   \resumeSubHeadingListEnd
   
   \footnotetext{Students who have shown especially good behaviour or enhanced the university's honour can be given a contribution award. The contribution award winner shall be selected by deliberation of the Committee based on recommendations from the head of the school (department) in each school (department). In 2018, among 704 undergraduates from various departments, 6 people have been awarded.}
+  
+}{\section{학력}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {에딘버러 대학} {에딘버러, 영국}
+      {PhD in Informatics: Robotics, Computer Vision, Computer Graphics and Animation}{Sep 2019 -- Aug 2023 (Estimated)}
+    \resumeSubheading
+      {The University of Edinburgh}{Edinburgh, United Kingdom}
+      {MSc in Artificial Intelligence (Merits, 69.8\%)}{Sep 2018 -- Aug 2019}
+    \resumeSubheading
+      {Ulsan National Institute of Science and Technology (UNIST)}{Ulsan, South Korea}
+      {Bachelor in Electrical Engineering, Computer Science and Engineering: \textbf{magna cum laude}}{Mar 2014 -- Feb 2018}
+      \resumeItemListStart
+        \resumeItem{Contribution Award\footnotemark}
+          {Chairman's Award}
+        \resumeItem{GPA of major subjects}
+          {\numprint{4.00}/\numprint{4.3} (\numprint{96.0}/100)}
+        \resumeItem{Total Grade Point Average}
+          {\numprint{3.79}/\numprint{4.3} (\numprint{93.9}/100)}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+  
+  \footnotetext{Students who have shown especially good behaviour or enhanced the university's honour can be given a contribution award. The contribution award winner shall be selected by deliberation of the Committee based on recommendations from the head of the school (department) in each school (department). In 2018, among 704 undergraduates from various departments, 6 people have been awarded.}
+
+}
 
 %-----------SCHOLARSHIPS-----------------
 % \newcommand{\calcCurrencyPrice}[2]{\FPeval{#2}{round(#1 / \rateWonCurrency,0)}} % #1 = input, #2 = output
@@ -243,32 +288,6 @@
 %-----------EXPERIENCE-----------------
 \section{Experience}
   \resumeSubHeadingListStart
-    \resumeSubheading
-      {Demonstration for Machine Learning Practical}{The University of Edinburgh}
-      {Ran lab sessions for the Machine Learning Practical (MSc module).}{Sep 2019 --}
-      
-    \resumeSubheading
-      {Tutoring for Object-Oriented Programming}{The University of Edinburgh}
-      {Ran 2 tutorial sessions of OOP Java programming tutorials with Eclipse IDE.}{Jan 2019 -- Apr 2019}
-      \resumeItemListStart
-        \resumeSimpleItem{Nominated for the \textbf{Best Student Who Tutors Award}}
-      \resumeItemListEnd
-      
-    \resumeSubheading
-      {Tutoring for Imperative Programming}{The University of Edinburgh}
-      {Ran tutorial sessions of Java programming with Greenfoot IDE.}{Nov 2018}
-      
-    \ifdefined \includeMinor
-    \resumeSubheading
-      {Private Tutoring}{Personal}
-      {Tutored TOEIC (English) to a job seeker.}{Jul 2018 -- Aug 2018}
-    \fi
-      
-    \ifdefined \includeMinor
-    \resumeSubheading
-      {Private Tutoring}{Personal}
-      {Tutored R Language to a master student.}{Apr 2018}
-    \fi
     
     \resumeSubheading
       {NAVER UNIST Undergraduate Poster Award (NAVER UUPA)}{NAVER Corp., UNIST}
@@ -305,22 +324,7 @@
         \fi
       \resumeItemListEnd
     
-    \ifdefined \includeMinor
-    \resumeSubheading
-      {Private Tutoring}{Personal}
-      {Tutored Computer Science and Engineering subjects to two university students.}{Mar 2016 -- Dec 2016}
-      \resumeItemListStart
-        \resumeSimpleItem{Object Oriented Programming (C++)}
-        \resumeSimpleItem{Data Structure (C++)}
-        \resumeSimpleItem{Principles of Programming Languages (SML, Racket, Python)}
-      \resumeItemListEnd
-    \fi
-      
-    \ifdefined \includeMinor
-    \resumeSubheading
-      {Private Tutoring}{Personal}
-      {Tutored C Language to a pre-high school student.}{Jan 2016 -- Feb 2016}
-    \fi
+
       
     \ifdefined \includeMinor
     \resumeSubheading
@@ -355,11 +359,7 @@
       {Completed the entrepreneurship programme.}{Aug 2015}
     \fi
     
-    \ifdefined \includeMinor
-    \resumeSubheading
-      {Private Tutoring}{Personal}
-      {Tutored mathematics to a high school student.}{July 2015 -- Aug 2015}
-    \fi
+
       
     \resumeSubheading
       {HeXATHON}{UNIST, NAVER Corp.}
@@ -371,27 +371,7 @@
       {Smart home app controlling electric output}{Mar 2015}
     \fi
     
-    \ifdefined \includeMinor
-    \resumeSubheading
-      {Private Tutoring}{Personal}
-      {Tutored physics to a pre-high school student.}{Jan 2015 -- Feb 2015}
-    \fi
-      
-    \resumeSubheading
-      {Tutoring for Engineering Programming I}{UNIST}
-      {Ran tutorial sessions for 3 terms.}{Sep 2014 -- Dec 2015}
-      
-    \ifdefined \includeMinor
-    \resumeSubheading
-      {Private Tutoring}{Personal}
-      {Tutored mathematics to a high school student.}{Jul 2014 -- Aug 2014}
-    \fi
-      
-    \ifdefined \includeMinor
-    \resumeSubheading
-      {Math Tutor at Private School}{Morning of Math}
-      {Problem-solving assistant for high school students}{Jul 2014 -- Aug 2014}
-    \fi
+
       
     \ifx \disallowBlankTerm{} \undefined
     \resumeSubheading
@@ -435,7 +415,89 @@
 
 
   \resumeSubHeadingListEnd
+  
+\section{Teaching}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Marker of Introductory Applied Machine Learning}{The University of Edinburgh}
+      {Marking coursework submissions for the MSc module.}{Oct 2020 --}
+      
+    \resumeSubheading
+      {Demonstrator/marker of Advanced Vision}{The University of Edinburgh}
+      {Ran lab sessions for the Advanced Vision (MSc module).}{Jan 2020 -- May 2020}
+      
+    \resumeSubheading
+      {Demonstrator of Machine Learning Practical}{The University of Edinburgh}
+      {Ran lab sessions for the Machine Learning Practical (MSc module).}{Sep 2019 -- Dec 2019}
+      
+    \resumeSubheading
+      {Tutor of Object-Oriented Programming}{The University of Edinburgh}
+      {Ran 2 tutorial sessions of OOP Java programming tutorials with Eclipse IDE.}{Jan 2019 -- Apr 2019}
+      \resumeItemListStart
+        \resumeSimpleItem{Nominated for the \textbf{Best Student Who Tutors Award}}
+      \resumeItemListEnd
+      
+    \resumeSubheading
+      {Tutor of Imperative Programming}{The University of Edinburgh}
+      {Ran tutorial sessions of Java programming with Greenfoot IDE.}{Nov 2018}
+      
+    \ifdefined \includeMinor
+    \resumeSubheading
+      {Private Tutoring}{Personal}
+      {Tutored TOEIC (English) to a job seeker.}{Jul 2018 -- Aug 2018}
+    \fi
+      
+    \ifdefined \includeMinor
+    \resumeSubheading
+      {Private Tutoring}{Personal}
+      {Tutored R Language to a master student.}{Apr 2018}
+    \fi
     
+    \ifdefined \includeMinor
+    \resumeSubheading
+      {Private Tutoring}{Personal}
+      {Tutored Computer Science and Engineering subjects to two university students.}{Mar 2016 -- Dec 2016}
+      \resumeItemListStart
+        \resumeSimpleItem{Object Oriented Programming (C++)}
+        \resumeSimpleItem{Data Structure (C++)}
+        \resumeSimpleItem{Principles of Programming Languages (SML, Racket, Python)}
+      \resumeItemListEnd
+    \fi
+      
+    \ifdefined \includeMinor
+    \resumeSubheading
+      {Private Tutoring}{Personal}
+      {Tutored C Language to a pre-high school student.}{Jan 2016 -- Feb 2016}
+    \fi
+    
+    \ifdefined \includeMinor
+    \resumeSubheading
+      {Private Tutoring}{Personal}
+      {Tutored mathematics to a high school student.}{July 2015 -- Aug 2015}
+    \fi
+
+    \ifdefined \includeMinor
+    \resumeSubheading
+      {Private Tutoring}{Personal}
+      {Tutored physics to a pre-high school student.}{Jan 2015 -- Feb 2015}
+    \fi
+      
+    \resumeSubheading
+      {Tutor of Engineering Programming I}{UNIST}
+      {Ran tutorial sessions for 3 terms.}{Sep 2014 -- Dec 2015}
+      
+    \ifdefined \includeMinor
+    \resumeSubheading
+      {Private Tutoring}{Personal}
+      {Tutored mathematics to a high school student.}{Jul 2014 -- Aug 2014}
+    \fi
+      
+    \ifdefined \includeMinor
+    \resumeSubheading
+      {Math Tutor at a Private School}{Morning of Math}
+      {Problem-solving assistant for high school students}{Jul 2014 -- Aug 2014}
+    \fi
+  \resumeSubHeadingListEnd
 
 %--------PROGRAMMING SKILLS------------
 %\section{Programming Skills}
@@ -453,7 +515,7 @@
   
 %--------LANGUAGES, FRAMEWORKS AND TOOLS------------
 \section{Languages, Frameworks and Tools}
-  C $\cdot \ $ C++ $\cdot \ $ Python $\cdot \ $ Linux Bash $\cdot \ $ TensorFlow / Keras (Machine learning) $\cdot \ $ MPI (Parallel programming) $\cdot \ $ CUDA (GPU parallel programming) $\cdot \ $ MATLAB $\cdot \ $ OpenCV $\cdot \ $ Git (Version control) $\cdot \ $ Docker $\cdot \ $ NVIDIA Jetson TX2 (Embedded board and Linux) $\cdot \ $ Raspberry Pi (IoT Linux) $\cdot \ $ MFC (Windows programming) $\cdot \ $ Java $\cdot \ $ HTML $\cdot \ $ PHP $\cdot \ $ MySQL / Maria DB $\cdot \ $ R $\cdot \ $ Flash action script $\cdot \ $ Processing $\cdot \ $ NXT Robot C $\cdot \ $ Xpress Engine(Website) $\cdot \ $ Wordpress(Website) $\cdot \ $ \LaTeX
+  C $\cdot \ $ C++ $\cdot \ $ Python $\cdot \ $ Linux Bash $\cdot \ $ PyTorch / TensorFlow / Keras (Machine learning) $\cdot \ $ MPI (Parallel programming) $\cdot \ $ CUDA (GPU parallel programming) $\cdot \ $ MATLAB $\cdot \ $ OpenCV $\cdot \ $ Git (Version control) $\cdot \ $ Docker $\cdot \ $ NVIDIA Jetson TX2 (Embedded board and Linux) $\cdot \ $ Raspberry Pi (IoT Linux) $\cdot \ $ MFC (Windows programming) $\cdot \ $ Java $\cdot \ $ HTML $\cdot \ $ PHP $\cdot \ $ MySQL / Maria DB $\cdot \ $ R $\cdot \ $ Flash action script $\cdot \ $ Processing $\cdot \ $ NXT Robot C $\cdot \ $ Xpress Engine(Website) $\cdot \ $ Wordpress(Website) $\cdot \ $ \LaTeX
   
   
 
